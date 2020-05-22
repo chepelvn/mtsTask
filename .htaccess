@@ -1,0 +1,19 @@
+
+RewriteEngine On
+RewriteRule ^config\.ini$ / [L,R]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ index.php?path=$1&%{QUERY_STRING} [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+
+RewriteRule ^(.*)$ [R=404]
+
+<IfModule mod_mime.c>
+AddType application/x-java-applet .class
+AddType text/x-component .htc
+</IfModule>
+
+<IfModule mod_security.c>
+SecFilterScanPOST Off
+</IfModule>
