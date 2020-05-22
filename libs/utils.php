@@ -5,7 +5,9 @@
  * Date: 21.05.2020
  * Time: 22:07
  */
+$__CONFIG = [];
 function config($var = null){
+    global $__CONFIG;
     $config = &$__CONFIG;
     if(!$config){
         $path = CURRENT_WORKING_DIR . "/config.ini";
@@ -41,4 +43,9 @@ function render($template, $data = array()){
     require CURRENT_WORKING_DIR.'/'.config('dir.templates').'/'.$template.'.php';
     $content = ob_get_clean();
     require CURRENT_WORKING_DIR.'/'.config('dir.layoutBody');
+}
+
+function jsonDisplay($data){
+    header("Content-Type: application/json");
+    echo json_encode($data);
 }

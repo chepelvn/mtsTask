@@ -16,17 +16,22 @@ spl_autoload_register(function($class){
 });
 
 $pathExp = explode('/', $_GET['path']);
-$app = 'Table';
+$app = config('sys.defaultAppPage');
+$action = config('sys.defaultAppAction');
+$args = [];
 if(isset($pathExp[0])){
     if($pathExp[0])
         $app = $pathExp[0];
+    if(isset($pathExp[1])){
+        $action = $pathExp[1];
+        if(count($pathExp) > 1)
+            $args = array_slice($pathExp, 2);
+    }
 }
 
-if(class_exists($app)){
-    if(method_exists($app, 'action')){
-        (new $app)->action();
-        return ;
-    }
+if(is_callable([$app, $action])){
+    call_user_func_array([new $app, $action], $args);
+    return ;
 }
 
 header("HTTP/1.0 404 Not Found");

@@ -6,8 +6,10 @@
  * Date: 21.05.2020
  * Time: 22:04
  */
-class TableFactory
+class UsersFactory
 {
+    const DB = 'users';
+
     /**
      * @var $_connect PDO
      */
