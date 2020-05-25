@@ -1,3 +1,3 @@
 <?php
 
-addScriptHead('/js/apps/users.js');
+addScriptHead('/js/apps/users.js', true);

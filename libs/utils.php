@@ -50,14 +50,21 @@ function jsonDisplay($data){
     echo json_encode($data);
 }
 
+function addScript($path, $timestamp = false){
+    if($timestamp === true)
+        $path .= "?".filemtime(CURRENT_WORKING_DIR.$path);
+    echo "<script type=\"text/javascript\" src=\"$path\"></script>";
+}
+
 $_SCRIPTS = [];
-function addScriptHead($path){
+function addScriptHead($path, $timestamp = false){
     global $_SCRIPTS;
-    $_SCRIPTS[] = $path;
+    $_SCRIPTS[] = [$path, $timestamp];
 }
 
 function getScriptsHead(){
     global $_SCRIPTS;
-    foreach ($_SCRIPTS as $SCRIPT)
-        echo "<script type=\"text/javascript\" src=\"$SCRIPT\"></script>";
+    foreach ($_SCRIPTS as $SCRIPT){
+        call_user_func_array('addScript', $SCRIPT);
+    }
 }
