@@ -1,4 +1,9 @@
+
 Ext.onReady(function(){
+    var wrapPanel = document.createElement('div');
+    wrapPanel.id = 'panel';
+    document.body.append(wrapPanel);
+
     Ext.define('myModel', {
         extend: 'Ext.data.Model',
         fields: ['first_name','last_name','email','phone','company', 'id', 'age', 'desc', 'address']
@@ -162,6 +167,6 @@ Ext.onReady(function(){
         allowDomMove: true,
         title: 'Пользователи',
         items:[Table],
-        renderTo: 'panel'
+        renderTo: wrapPanel.id
     });
 });

@@ -49,3 +49,15 @@ function jsonDisplay($data){
     header("Content-Type: application/json");
     echo json_encode($data);
 }
+
+$_SCRIPTS = [];
+function addScriptHead($path){
+    global $_SCRIPTS;
+    $_SCRIPTS[] = $path;
+}
+
+function getScriptsHead(){
+    global $_SCRIPTS;
+    foreach ($_SCRIPTS as $SCRIPT)
+        echo "<script type=\"text/javascript\" src=\"$SCRIPT\"></script>";
+}
