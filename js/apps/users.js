@@ -25,7 +25,6 @@ Ext.onReady(function(){
     var FormsCollection = {};
 
     var Table = Ext.create('Ext.grid.Panel', {
-        closable : true,
         store: store,
         title: 'Список',
         columns: [
@@ -58,6 +57,7 @@ Ext.onReady(function(){
                     FormsCollection[index].show();
                 } else {
                     var Form = Ext.create('Ext.form.Panel', {
+                        closable : true,
                         title: dataUser['last_name'] + ' ' + dataUser['first_name'],
                         bodyPadding: 5,
                         width: 450,
@@ -165,9 +165,15 @@ Ext.onReady(function(){
 
     var Tabs = Ext.create('Ext.tab.Panel', {
         fullscreen: true,
-        allowDomMove: true,
         title: 'Пользователи',
         items:[Table],
-        renderTo: wrapPanel.id
+        renderTo: wrapPanel.id,
+        listeners: {
+            beforeremove: function (panel, item, eOpts) {
+                for(var di in FormsCollection)
+                    if(FormsCollection[di] == item)
+                        delete FormsCollection[di];
+            }
+        }
     });
 });

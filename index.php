@@ -16,7 +16,7 @@ spl_autoload_register(function($class){
 });
 
 $pathExp = explode('/', $_GET['path']);
-$app = config('sys.defaultAppPage');
+$app = config('sys.defaultAppModule');
 $action = config('sys.defaultAppAction');
 $args = [];
 if(isset($pathExp[0])){
