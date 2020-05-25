@@ -25,6 +25,7 @@ Ext.onReady(function(){
     var FormsCollection = {};
 
     var Table = Ext.create('Ext.grid.Panel', {
+        closable : true,
         store: store,
         title: 'Список',
         columns: [
